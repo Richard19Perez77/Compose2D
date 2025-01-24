@@ -56,6 +56,14 @@ fun Game(resources: Resources) {
         var asuka02XOffset by remember { mutableFloatStateOf(0f) }
         var asuka02YOffset by remember { mutableFloatStateOf(0f) }
 
+        val asuka3 = BitmapFactory.decodeResource(resources, R.drawable.asuka03)
+        var asuka03Scaled by remember { mutableStateOf<Bitmap?>(null) }
+        var asuka03Position by remember { mutableStateOf(Offset(0f, 0f)) }
+        var asuka03XOffset by remember { mutableFloatStateOf(0f) }
+        var asuka03YOffset by remember { mutableFloatStateOf(0f) }
+
+        val asuka4 = BitmapFactory.decodeResource(resources, R.drawable.asuka04)
+
         Canvas(modifier = Modifier
             .fillMaxSize()
             .onSizeChanged {
@@ -79,6 +87,16 @@ fun Game(resources: Resources) {
                 asuka02Position = Offset(
                     x = asuka02XOffset,
                     y = asuka02YOffset
+                )
+
+                val newWidth3 = w / 7
+                val scaleFactor3 = newWidth3.toFloat() / asuka3.width
+                val newHeight3 = (asuka3.height * scaleFactor3).toInt()
+                asuka03Scaled =
+                    Bitmap.createScaledBitmap(asuka3, newWidth3, newHeight3, true)
+                asuka03Position = Offset(
+                    x = asuka03XOffset,
+                    y = asuka03YOffset
                 )
             }
             .pointerInput(Unit) {
